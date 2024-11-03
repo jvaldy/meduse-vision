@@ -1,6 +1,18 @@
 # config/routes.yaml
 
+default:
+    path: /default
+    controller: App\Controller\DefaultController::default
+
 index:
     path: /
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\HomeController::index
+
+sign_up:
+    path: /sign/up
+    controller: App\Controller\SignUpController::index
+
+sign_in:
+    path: /sign/in
+    controller: App\Controller\SignInController::index
 
