@@ -11921,12 +11921,12 @@ div .semi-nav ~ footer {
 }
 
 .btn-primary {
-  background-color: rgba(var(--primary), 1);
-  border: 1px solid rgba(var(--primary), 1);
+  background-color: #4b0600;
+  border: 1px solid #4b0600;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.show, .btn-primary:checked, .btn-primary:focus, .btn-primary:focus-visible, .btn-primary.disabled {
-  background-color: rgba(var(--primary), 1) !important;
-  border-color: rgba(var(--primary), 1) !important;
+  background-color: #6e0b01 !important;
+  border-color: #6e0b01 !important;
   transition: var(--app-transition);
 }
 
@@ -25005,18 +25005,18 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .text-primary {
-  color: rgba(var(--primary), 1) !important;
+  color: #4b0600 !important;
 }
 .text-primary:hover {
-  color: rgba(var(--primary), 0.8) !important;
+  color: #5e0800 !important;
   cursor: pointer;
 }
 
 .link-primary {
-  color: rgba(var(--primary), 1) !important;
+  color: #4b0600 !important;
 }
 .link-primary:hover {
-  color: rgba(var(--primary), 0.8) !important;
+  color: #5e0800 !important;
   cursor: pointer;
 }
 
@@ -26086,7 +26086,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .sign-in-bg {
-  background-color: rgba(var(--primary), 0.3);
+  background-color: #ffc573;
 }
 .sign-in-bg .sign-in-content-bg {
   background-color: var(--white);
@@ -26122,7 +26122,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .image-contentbox {
-  background-color: rgba(var(--primary), 0.1);
+  /* background-color: rgba(var(--primary), 0.1); */
 }
 .image-contentbox .signup-bg-img img {
   margin: auto;
@@ -26130,7 +26130,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .login-form-container {
-  background-image: url(fa1f52d77e700f84f29c.png);
+  /* background-image: url(fa1f52d77e700f84f29c.png); */
+  background-color: #ffc573;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -26152,7 +26153,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 .login-form-container .form_container h3 {
   font-size: calc(20px + 8 * (100vw - 300px) / 1620);
-  color: rgb(var(--primary), 0.75);
+  color: #4b0600;
   font-weight: 600;
 }
 .login-form-container .form_container p {

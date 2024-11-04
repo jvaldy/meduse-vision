@@ -16,3 +16,15 @@ sign_in:
     path: /sign/in
     controller: App\Controller\SignInController::index
 
+reset1:
+    path: /reset1
+    controller: App\Controller\Reset1Controller::index
+
+reset2:
+    path: /reset2
+    controller: App\Controller\Reset2Controller::index
+
+terms_condition:
+    path: /terms_condition
+    controller: App\Controller\TermsConditionController::index
+

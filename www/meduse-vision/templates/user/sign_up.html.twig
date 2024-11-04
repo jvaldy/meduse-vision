@@ -46,34 +46,45 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-5 text-center text-lg-start">
-                                        <h2 class="text-primary f-w-600">Create Account</h2>
-                                        <p>Get Started For Free Today!</p>
+                                        <h2 class="text-primary f-w-600">Créer un compte</h2>
+                                        <p>Forgeons vos ambitions, de la pierre au joyau !</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your Username" id="username"
+                                        <label for="username" class="form-label">Pseudo</label>
+                                        <input type="text" class="form-control" placeholder="Entrer votre pseudo" id="username"
                                                required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
-                                        <input type="email" class="form-control" placeholder="Enter Your Email" id="email" required>
+                                        <input type="email" class="form-control" placeholder="Entrer votre Email" id="email" required>
+                                    </div>                    
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="city" class="form-label">Myth-code</label>
+                                        <select class="form-select" id="city">
+                                            <option selected="">-- Choix du Myth-code --</option>
+                                            <option value="1">Zeus</option>
+                                            <option value="2">Meduse</option>
+                                            <option value="3">Hercule</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" placeholder="Enter Your Password" id="password"
+                                        <label for="password" class="form-label">Mot de passe</label>
+                                        <input type="password" class="form-control" placeholder="Entrer votre mot de passe" id="password"
                                                required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="password" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" placeholder="Enter Your Password" id="password1"
+                                        <label for="password" class="form-label">Confirmer le mot de passe</label>
+                                        <input type="password" class="form-control" placeholder="Confirmer votre mot de passe" id="password1"
                                                required>
                                     </div>
                                 </div>
@@ -82,23 +93,24 @@
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="checkbox" value="" id="checkDefault">
                                             <label class="form-check-label text-secondary" for="checkDefault">
-                                                Accept Terms & Conditions
+                                                Accepter les <a href="{{ ('../terms_condition') }}"
+                                                                   class="link-primary text-decoration-underline">conditions générales</a>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <a href="{{path('index')}}" role="button" class="btn btn-primary w-100">Sign Up</a>
+                                        <a href="{{path('index')}}" role="button" class="btn btn-primary w-100">S'inscrire</a>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="text-center text-lg-start">
-                                        Already Have A Account? <a href="{{ ('sign_in') }}"
-                                                                   class="link-primary text-decoration-underline"> Sign in</a>
+                                        Vous avez déjà un compte ? <a href="{{ ('../sign/in') }}"
+                                                                   class="link-primary text-decoration-underline"> Se connecter</a>
                                     </div>
                                 </div>
-                                <div class="app-divider-v justify-content-center">
+                                {# <div class="app-divider-v justify-content-center">
                                     <p>Or sign up with</p>
                                 </div>
                                 <div class="col-12">
@@ -110,7 +122,7 @@
                                         <button type="button" class="btn btn-github icon-btn b-r-22 m-1"><i
                                                 class="ti ti-brand-github text-white"></i></button>
                                     </div>
-                                </div>
+                                </div> #}
                             </div>
                         </form>
                     </div>
