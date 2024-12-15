@@ -65,15 +65,16 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label for="city" class="form-label">Myth-code</label>
-                                        <select class="form-select" id="city">
-                                            <option selected="">-- Choix du Myth-code --</option>
-                                            <option value="1">Zeus</option>
-                                            <option value="2">Meduse</option>
-                                            <option value="3">Hercule</option>
+                                        <label for="myth-code" class="form-label">Myth-code</label>
+                                        <select class="form-select" id="myth-code" name="myth_code">
+                                            <option selected>-- Choix du Myth-code --</option>
+                                            {% for mythology in mythologies %}
+                                                <option value="{{ mythology.id }}">{{ mythology.name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Mot de passe</label>

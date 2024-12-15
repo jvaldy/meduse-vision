@@ -49,7 +49,7 @@
                                         <p>Forgeons vos ambitions, de la pierre au joyau !</p>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                {# <div class="col-12">
                                     <div class="mb-3">
                                         <label for="city" class="form-label">Myth-code</label>
                                         <select class="form-select" id="city">
@@ -59,7 +59,19 @@
                                             <option value="3">Hercule</option>
                                         </select>
                                     </div>
+                                </div> #}
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="myth-code" class="form-label">Myth-code</label>
+                                        <select class="form-select" id="myth-code" name="myth_code">
+                                            <option selected>-- Choix du Myth-code --</option>
+                                            {% for mythology in mythologies %}
+                                                <option value="{{ mythology.id }}">{{ mythology.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
