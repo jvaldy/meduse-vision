@@ -40,7 +40,20 @@
 
                     </div>
                 </div>
-                <div class="col-lg-6 form-contentbox">
+
+
+
+
+
+
+
+
+
+
+                {# <div class="col-lg-6 form-contentbox">
+
+
+
                     <div class="form-container">
                         <form class="app-form">
                             <div class="row">
@@ -69,7 +82,7 @@
                                         <select class="form-select" id="myth-code" name="myth_code">
                                             <option selected>-- Choix du Myth-code --</option>
                                             {% for mythology in mythologies %}
-                                                <option value="{{ mythology.id }}">{{ mythology.name }}</option>
+                                                <option value="{{ mythology.id }}">{{ mythology.name }} ( {{ mythology.category}} )</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -111,23 +124,94 @@
                                                                    class="link-primary text-decoration-underline"> Se connecter</a>
                                     </div>
                                 </div>
-                                {# <div class="app-divider-v justify-content-center">
-                                    <p>Or sign up with</p>
-                                </div>
-                                <div class="col-12">
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-facebook icon-btn b-r-22 m-1"><i
-                                                class="ti ti-brand-facebook text-white"></i></button>
-                                        <button type="button" class="btn btn-gmail icon-btn b-r-22 m-1"><i
-                                                class="ti ti-brand-google text-white"></i></button>
-                                        <button type="button" class="btn btn-github icon-btn b-r-22 m-1"><i
-                                                class="ti ti-brand-github text-white"></i></button>
-                                    </div>
-                                </div> #}
+                                
                             </div>
                         </form>
                     </div>
+
+
+
+
+                    
+                </div> #}
+                
+
+                <div class="col-lg-6 form-contentbox">
+                    <div class="form-container">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-5 text-center text-lg-start">
+                                    <h2 class="text-primary f-w-600">Créer un compte</h2>
+                                    <p>Forgeons vos ambitions, de la pierre au joyau !</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+
+
+                        {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+                        <div class="row">
+
+
+                            <div class="col-12">
+                                {{ form_row(form.username) }}<br>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="email" class="required">Email</label>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre email'}}) }}
+                                    
+                                    {# Affiche les erreurs du champ email avec une classe personnalisée #}
+                                    {% if form.email.vars.errors|length > 0 %}
+                                        <div class="error-message text-danger">
+                                            {{ form_errors(form.email) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div><br>
+                            <div class="col-12">
+                                {{ form_row(form.mythology) }} <br>
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.password) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.confirm_password) }} <br>
+                            </div>
+                            <div class="col-12">
+                                {{ form_row(form.accept_terms) }} <br>
+                            </div>
+                            <div class="col-12">
+                                {{ form_row(form.submit) }} <br>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center text-lg-start">
+                                    Vous avez déjà un compte ? <a href="{{ ('../sign/in') }}"
+                                                                class="link-primary text-decoration-underline"> Se connecter</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
         <!-- sign up end -->
