@@ -6,14 +6,57 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .cookies-list { margin-top: 20px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; }
+    .cookies-list li { margin: 5px 0; }
 </style>
 
-Bienvenue sur Meduse !
+{# Bienvenue sur Meduse !
 
 <div class="example-wrapper">
     <ul>
         <li>Your controller at <code><a href="{{ '/var/www/html/meduse-vision/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/var/www/html/meduse-vision/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
     </ul>
+</div>
+{% endblock %} #}
+
+
+
+
+
+
+<div class="example-wrapper">
+    <h1>Bienvenue sur Meduse !</h1>
+    <p>Vos cookies actuels :</p>
+
+    <ul class="cookies-list">
+        {% for name, value in app.request.cookies %}
+            <li><strong>{{ name }}</strong>: {{ value }}</li>
+        {% else %}
+            <li>Aucun cookie disponible.</li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <h2>Autres informations utiles :</h2>
+        <ul>
+            <li>Votre contrôleur se trouve à <code><a href="{{ '/var/www/html/meduse-vision/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
+            <li>Votre template se trouve à <code><a href="{{ '/var/www/html/meduse-vision/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
+        </ul>
+    </div>
+
+    <div>
+        {# <a href="{{ path('logout') }}" class="btn btn-danger">Déconnexion</a> #}
+        {# <a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnecter</a> #}
+        
+        {% if app.session and app.session.get('user_id') %}
+            <p>Bienvenue, {{ app.session.get('user_name') }} !</p>
+            <a href="{{ path('logout') }}" class="btn btn-danger">Déconnecter</a>
+        {% else %}
+            <a href="{{ path('sign_in') }}" class="btn btn-primary">Se connecter</a>
+        {% endif %}
+
+
+    </div>
 </div>
 {% endblock %}

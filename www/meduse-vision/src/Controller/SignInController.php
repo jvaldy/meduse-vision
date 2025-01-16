@@ -1,18 +1,58 @@
-<?php
+<?php 
 
-// namespace App\Controller;
+namespace App\Controller;
 
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SignInType;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\MythologyRepository;
+
+
 
 // class SignInController extends AbstractController
 // {
 //     #[Route('/sign/in', name: 'sign_in')]
-//     public function index(): Response
+//     public function index(Request $request, UserRepository $userRepository, SessionInterface $session): Response
 //     {
+//         // Création du formulaire de connexion
+//         $form = $this->createForm(SignInType::class);
+//         $form->handleRequest($request);
+
+//         if ($form->isSubmitted() && $form->isValid()) {
+//             $data = $form->getData(); // Récupère les données du formulaire
+//             $email = $data['email'];
+//             $password = $data['password'];
+
+//             // Recherche de l'utilisateur dans la base de données
+//             $user = $userRepository->findOneBy(['email' => $email]);
+
+//             if (!$user) {
+//                 $this->addFlash('error', 'Utilisateur non trouvé.');
+//                 return $this->redirectToRoute('sign_in');
+//             }
+
+//             // Vérification du mot de passe
+//             if (!password_verify($password, $user->getPassword())) {
+//                 $this->addFlash('error', 'Mot de passe incorrect.');
+//                 return $this->redirectToRoute('sign_in');
+//             }
+
+//             // Création de la session utilisateur
+//             $session->set('user_id', $user->getId());
+//             $session->set('user_email', $user->getEmail());
+//             $session->set('user_name', $user->getFirstName());
+
+//             $this->addFlash('success', 'Connexion réussie !');
+//             return $this->redirectToRoute('member_area');
+//         }
+
+//         // Envoi du formulaire à la vue
 //         return $this->render('user/sign_in.html.twig', [
-//             'controller_name' => 'SignInController',
+//             'form' => $form->createView(),
 //         ]);
 //     }
 // }
@@ -20,45 +60,13 @@
 
 
 
-namespace App\Controller;
-
-use App\Repository\MythologyRepository; // Import du repository
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
-use App\Entity\User;
-use App\Form\SignInType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
-
-
-
-class SignInController extends AbstractController
-{
-    #[Route('/sign/in', name: 'sign_in')]
-    public function index(MythologyRepository $mythologyRepository): Response
-    {
-        // Récupération de toutes les données de la table Mythology
-        $mythologies = $mythologyRepository->findAll();
-
-        // Envoi des données à la vue
-        return $this->render('user/sign_in.html.twig', [
-            'mythologies' => $mythologies,
-        ]);
-    }
-}
-
-
 
 
 
 // class SignInController extends AbstractController
 // {
 //     #[Route('/sign/in', name: 'sign_in')]
-//     public function index(Request $request, MythologyRepository $mythologyRepository, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+//     public function index(Request $request, MythologyRepository $mythologyRepository): Response
 //     {
 //         // Récupération des mythologies pour le champ "myth_code"
 //         $mythologies = $mythologyRepository->findAll();
@@ -67,7 +75,7 @@ class SignInController extends AbstractController
 //             $choices[$mythology->getName() . ' (' . $mythology->getCategory() . ')'] = $mythology->getId();
 //         }
 
-//         // Création du formulaire en passant les choix au FormType
+//         // Création du formulaire
 //         $form = $this->createForm(SignInType::class, null, [
 //             'mythologies_choices' => $choices,
 //         ]);
@@ -77,27 +85,10 @@ class SignInController extends AbstractController
 //         if ($form->isSubmitted() && $form->isValid()) {
 //             $data = $form->getData();
 
-//             // Création de l'utilisateur
-//             $user = new User();
-//             $user->setEmail($data['email']);
-//             $user->setPassword(
-//                 $passwordHasher->hashPassword($user, $data['password'])
-//             );
+//             // Logique de connexion (authentification)
+//             // Exemple : vérifier les informations avec la base de données
 
-//             // Associer le myth-code
-//             $mythology = $entityManager->getRepository(Mythology::class)->find($data['myth_code']);
-//             if ($mythology) {
-//                 $user->setMythology($mythology->getName());
-//             }
-
-//             // Sauvegarde en base de données
-//             $entityManager->persist($user);
-//             $entityManager->flush();
-
-//             // Message de confirmation
-//             $this->addFlash('success', 'Votre compte a été créé avec succès !');
-
-//             return $this->redirectToRoute('sign_in');
+//             return $this->redirectToRoute('member_area'); // Redirige vers l'espace membre
 //         }
 
 //         return $this->render('user/sign_in.html.twig', [
@@ -105,3 +96,74 @@ class SignInController extends AbstractController
 //         ]);
 //     }
 // }
+
+
+
+
+
+
+
+
+class SignInController extends AbstractController
+{
+    #[Route('/sign/in', name: 'sign_in')]
+    public function index(
+        Request $request,
+        MythologyRepository $mythologyRepository,
+        UserRepository $userRepository,
+        SessionInterface $session
+    ): Response {
+
+        // Si l'utilisateur est déjà connecté, redirige vers "member_area"
+        if ($session->has('user_id')) {
+            return $this->redirectToRoute('member_area');
+        }
+
+
+        // Récupération des mythologies pour le champ "myth_code"
+        $mythologies = $mythologyRepository->findAll();
+        $choices = [];
+        foreach ($mythologies as $mythology) {
+            $choices[$mythology->getName() . ' (' . $mythology->getCategory() . ')'] = $mythology->getId();
+        }
+
+        // Création du formulaire de connexion
+        $form = $this->createForm(SignInType::class, null, [
+            'mythologies_choices' => $choices,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData(); // Récupère les données du formulaire
+            $email = $data['email'];
+            $password = $data['password'];
+
+            // Recherche de l'utilisateur dans la base de données
+            $user = $userRepository->findOneBy(['email' => $email]);
+
+            if (!$user) {
+                $this->addFlash('error', 'Utilisateur non trouvé.');
+                return $this->redirectToRoute('sign_in');
+            }
+
+            // Vérification du mot de passe
+            if (!password_verify($password, $user->getPassword())) {
+                $this->addFlash('error', 'Mot de passe incorrect.');
+                return $this->redirectToRoute('sign_in');
+            }
+
+            // Création de la session utilisateur
+            $session->set('user_id', $user->getId());
+            $session->set('user_email', $user->getEmail());
+            $session->set('user_name', $user->getUsername());
+
+            $this->addFlash('success', 'Connexion réussie !');
+            return $this->redirectToRoute('member_area');
+        }
+
+        // Envoi du formulaire à la vue
+        return $this->render('user/sign_in.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+}

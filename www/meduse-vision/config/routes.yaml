@@ -28,3 +28,9 @@ terms_condition:
     path: /terms_condition
     controller: App\Controller\TermsConditionController::index
 
+logout:
+    path: /logout
+
+member_area:
+    path: /member_area
+    controller: App\Controller\MemberAreaController::index

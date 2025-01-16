@@ -14,6 +14,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+use App\Form\SignInType;
+use App\Repository\UserRepository;
+
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+
 
 // class SignUpController extends AbstractController
 // {
@@ -49,8 +55,18 @@ class SignUpController extends AbstractController
         Request $request,
         MythologyRepository $mythologyRepository,
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        SessionInterface $session
     ): Response {
+
+
+        // Si l'utilisateur est déjà connecté, redirige vers "member_area"
+        if ($session->has('user_id')) {
+            return $this->redirectToRoute('member_area');
+        }
+
+
+
         // Récupération des mythologies pour le champ "myth_code"
         $mythologies = $mythologyRepository->findAll();
         $choices = [];

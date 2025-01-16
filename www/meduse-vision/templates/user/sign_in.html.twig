@@ -2,132 +2,84 @@
 <html lang="en">
 
 <head>
-    <!-- All meta and title start-->
     {% include "layout/head.html.twig" %}
-    <!-- meta and title end-->
-    <title> {% block title %}Sign in  {% endblock %} | Ra-admin - Premium Admin Template</title>
-    <!-- css start-->
+    <title>{% block title %}Sign in{% endblock %} | Ra-admin - Premium Admin Template</title>
     {% include "layout/css.html.twig" %}
     {% block css %}
-        <!-- App css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-
-        <!-- Responsive css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
     {% endblock %}
-
-    <!-- css end-->
 </head>
 
 <body class="sign-in-bg">
 <div class="app-wrapper d-block">
     <div class="main-container">
-        <!-- Body main section starts -->
         <div class="container">
             <div class="row sign-in-content-bg">
                 <div class="col-lg-6 image-contentbox d-none d-lg-block">
-                    <div class="form-container ">
+                    <div class="form-container">
                         <div class="signup-content mt-4">
-                <span>
-                  <img src="{{ asset('../assets/images/logo/1.png') }}" alt="" class="img-fluid ">
-                </span>
+                            <span>
+                                <img src="{{ asset('../assets/images/logo/1.png') }}" alt="" class="img-fluid">
+                            </span>
                         </div>
-
                         <div class="signup-bg-img">
                             <img src="{{ asset('../assets/images/login/04.png') }}" alt="" class="img-fluid">
                         </div>
                     </div>
-
                 </div>
+
                 <div class="col-lg-6 form-contentbox">
-
-
-
                     <div class="form-container">
-                        <form class="app-form">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="mb-5 text-center text-lg-start">
-                                        <h2 class="text-primary f-w-600">Bienvenue sur Meduse ! </h2>
-                                        <p>Forgeons vos ambitions, de la pierre au joyau !</p>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <label for="myth-code" class="form-label">Myth-code</label>
-                                        <select class="form-select" id="myth-code" name="myth_code">
-                                            <option selected>-- Choix du Myth-code --</option>
-                                            {% for mythology in mythologies %}
-                                                <option value="{{ mythology.id }}">{{ mythology.name }} ( {{ mythology.category}} )</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Email</label>
-                                        <input type="email" class="form-control" placeholder="Entrer votre Email" id="email" required>
-                                    </div>                    
-                                </div>
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Mot de passe</label>
-                                        <a href="{{ ('/reset1') }}" class="link-primary float-end">Mot de passe oublié ?</a>
-                                        <input type="password" class="form-control" placeholder="Entrer votre mot de passe"
-                                               id="password">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                        <label class="form-check-label text-secondary" for="checkDefault">
-                                            Se souvenir de moi
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <a href="{{ path('index') }}" role="button" class="btn btn-primary w-100">Se connecter</a>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="text-center text-lg-start">
-                                        Vous n'avez pas encore de compte ? <a href="{{ ('../sign/up') }}"
-                                                                        class="link-primary text-decoration-underline">
-                                            S'inscrire</a>
-                                    </div>
-                                </div>
-                                
+                        {# Vérifie si une session utilisateur est active #}
+                        {% if app.session and app.session.get('user_id') %}
+                            <div class="text-center">
+                                <h2 class="text-primary f-w-600">Bonjour, {{ app.session.get('user_name') }} !</h2>
+                                <p>Bienvenue dans votre espace utilisateur.</p>
+                                <a href="{{ path('logout') }}" class="btn btn-danger">Déconnecter</a>
                             </div>
-                        </form>
+                        {% else %}
+                            {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-5 text-center text-lg-start">
+                                            <h2 class="text-primary f-w-600">Bienvenue sur Meduse !</h2>
+                                            <p>Forgeons vos ambitions, de la pierre au joyau !</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        {{ form_row(form.myth_code) }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {{ form_row(form.email) }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {{ form_row(form.password) }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {{ form_row(form.remember_me) }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {{ form_row(form.submit) }}
+                                    </div>
+                                </div>
+                            {{ form_end(form) }}
+                        {% endif %}
                     </div>
-
-
-
-                    
                 </div>
             </div>
         </div>
-        <!-- Body main section ends -->
     </div>
 </div>
 
-
-</body>
-
 {% block scripts %}
-
-    <!--jquery-->
     <script src="{{ asset('assets/js/jquery-3.6.3.min.js') }}"></script>
-
-    <!-- Bootstrap js-->
     <script src="{{ asset('assets/vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
 {% endblock %}
-
+</body>
 </html>
-
-
-
-
-

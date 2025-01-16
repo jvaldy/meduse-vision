@@ -1,4 +1,5 @@
 security:
+        
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -12,6 +13,9 @@ security:
         main:
             lazy: true
             provider: users_in_memory
+            logout:
+                path: logout  # La route utilisée pour la déconnexion
+                target: sign_in  # La route vers laquelle rediriger après déconnexion
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
