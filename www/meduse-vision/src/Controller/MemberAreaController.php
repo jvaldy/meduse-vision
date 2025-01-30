@@ -49,13 +49,63 @@ class MemberAreaController extends AbstractController
             return $this->redirectToRoute('sign_in');
         }
 
+        // Données simulées (à récupérer de la BDD si nécessaire)
+        $outils = [
+            [
+                'nom' => 'Outil 1',
+                'description' => 'Description rapide de l\'outil 1.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 22',
+                'description' => 'Description rapide de l\'outil 2.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 3',
+                'description' => 'Description rapide de l\'outil 3.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 4',
+                'description' => 'Description rapide de l\'outil 4.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 5',
+                'description' => 'Description rapide de l\'outil 5.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 6',
+                'description' => 'Description rapide de l\'outil 6.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+            [
+                'nom' => 'Outil 7',
+                'description' => 'Description rapide de l\'outil 7.',
+                'image' => 'https://via.placeholder.com/100',
+                'lien' => '#',
+            ],
+        ];
+
+        // return $this->render('terms_condition.html.twig', [
+        //     'outils' => $outils,
+        // ]);
+
         
 
         // return $this->render('member_area/index.html.twig', [
         //     'user_name' => $session->get('user_name'),
         // ]);
         return $this->render('index.html.twig', [
-            'user_name' => $session->get('user_name'),
+            'user_name' => $session->get('user_name'),'outils' => $outils,
         ]);
     }
 }

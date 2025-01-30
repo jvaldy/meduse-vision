@@ -18,14 +18,14 @@ class SignInType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('myth_code', ChoiceType::class, [
-                'choices' => $options['mythologies_choices'],
-                'label' => 'Myth-code',
-                'placeholder' => '-- Choix du Myth-code --',
-                'attr' => [
-                    'class' => 'form-select',
-                ],
-            ])
+            // ->add('myth_code', ChoiceType::class, [
+            //     'choices' => $options['mythologies_choices'],
+            //     'label' => 'Myth-code',
+            //     'placeholder' => '-- Choix du Myth-code --',
+            //     'attr' => [
+            //         'class' => 'form-select',
+            //     ],
+            // ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => [

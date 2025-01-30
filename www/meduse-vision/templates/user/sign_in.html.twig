@@ -42,30 +42,36 @@
                             {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="mb-5 text-center text-lg-start">
+                                        <div class="text-center text-lg-start">
                                             <h2 class="text-primary f-w-600">Bienvenue sur Meduse !</h2>
                                             <p>Forgeons vos ambitions, de la pierre au joyau !</p>
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
+                                    {# <div class="mb-4 col-12">
                                         {{ form_row(form.myth_code) }}
-                                    </div>
+                                    </div> #}
 
-                                    <div class="col-12">
+                                    <div class="mb-4 col-12">
                                         {{ form_row(form.email) }}
                                     </div>
 
-                                    <div class="col-12">
+                                    <div class="mb-4 col-12">
                                         {{ form_row(form.password) }}
                                     </div>
 
-                                    <div class="col-12">
+                                    <div class="mb-4 col-12">
                                         {{ form_row(form.remember_me) }}
                                     </div>
 
                                     <div class="col-12">
                                         {{ form_row(form.submit) }}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-center text-lg-start"><br>
+                                        Vous n'avez pas de compte ? <a href="{{ ('../sign/up') }}"
+                                                                    class="link-primary text-decoration-underline"> S'inscrire</a>
                                     </div>
                                 </div>
                             {{ form_end(form) }}

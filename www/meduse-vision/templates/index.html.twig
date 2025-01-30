@@ -1,62 +1,50 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
+{% extends "/layout/master.html.twig" %}
 
-{% block title %}Bienvenue sur Meduse !{% endblock %}
+{% block title %}Accueil{% endblock %}
+{% block css %}
 
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .cookies-list { margin-top: 20px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; }
-    .cookies-list li { margin: 5px 0; }
-</style>
+    <div class="container-fluid">
 
-{# Bienvenue sur Meduse !
+        <!-- Breadcrumb start -->
+        <div class="row m-1">
+            <div class="col-12 ">
+                <h4 class="main-title">Accueil</h4>
+                
+            </div>
+        </div>
+        <!-- Breadcrumb end -->
 
-<div class="example-wrapper">
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/meduse-vision/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/meduse-vision/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %} #}
+        {# {{outils}} #}
 
-
-
-
-
-
-<div class="example-wrapper">
-    <h1>Bienvenue sur Meduse !</h1>
-    <p>Vos cookies actuels :</p>
-
-    <ul class="cookies-list">
-        {% for name, value in app.request.cookies %}
-            <li><strong>{{ name }}</strong>: {{ value }}</li>
+        <!-- Vérifie si la variable outils existe avant d'afficher -->
+        {% if outils is defined and outils is not empty %}
+            <div class="row terms-condition-container">
+                {% for outil in outils %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="card shadow-lg p-3 mb-4 bg-white rounded">
+                            <div class="card-body text-center">
+                                <img src="{{ outil.image }}" alt="{{ outil.nom }}" class="mb-3 img-fluid" style="width: 100px;">
+                                <h3 class="card-title">{{ outil.nom }}</h3>
+                                <p class="card-text">{{ outil.description }}</p>
+                                <a href="{{ outil.lien }}" class="btn btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
-            <li>Aucun cookie disponible.</li>
-        {% endfor %}
-    </ul>
-
-    <div>
-        <h2>Autres informations utiles :</h2>
-        <ul>
-            <li>Votre contrôleur se trouve à <code><a href="{{ '/var/www/html/meduse-vision/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-            <li>Votre template se trouve à <code><a href="{{ '/var/www/html/meduse-vision/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-        </ul>
-    </div>
-
-    <div>
-        {# <a href="{{ path('logout') }}" class="btn btn-danger">Déconnexion</a> #}
-        {# <a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnecter</a> #}
-        
-        {% if app.session and app.session.get('user_id') %}
-            <p>Bienvenue, {{ app.session.get('user_name') }} !</p>
-            <a href="{{ path('logout') }}" class="btn btn-danger">Déconnecter</a>
-        {% else %}
-            <a href="{{ path('sign_in') }}" class="btn btn-primary">Se connecter</a>
+            <p class="alert alert-warning">Aucun outil disponible.</p>
         {% endif %}
 
 
     </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+<!--customizer-->
+<div id="customizer"></div>
+
 {% endblock %}
