@@ -1,0 +1,135 @@
+{% extends "/layout/master.html.twig" %}
+
+{% block title %}Liste des Suivis d'Épisodes{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <!-- Titre + Bouton d'ajout -->
+    <div class="row m-1">
+        <div class="col-6">
+            <h4 class="main-title">📌 Suivi des Contenus</h4>
+        </div>
+        <div class="col-6 text-end">
+            <a href="{{ path('episode_new') }}" class="btn btn-primary">
+                <i class="ti ti-plus"></i> Ajouter un nouveau
+            </a>
+        </div>
+    </div>
+
+    <!-- Tableau dynamique -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body ps-3 pe-3">
+                    <div class="table-responsive app-scroll app-datatable-default project-table">
+                        <table id="episodeTable" class="display container-fluid table-bottom-border app-data-table table-box-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Type</th>
+                                    <th>Statut</th>
+                                    <th>Progression</th>
+                                    <th>Plateforme</th>
+                                    <th>Date de Rappel</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for episode in episodes %}
+                                    <tr>
+                                        <td class="text-dark f-w-500">{{ episode.id }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-left align-items-center">
+                                                
+                                                <div>
+                                                    <h6 class="f-s-15 mb-0">{{ episode.name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-dark f-w-500">{{ episode.type }}</td>
+                                        <td>
+                                            <span class="badge 
+                                                {% if episode.status == 'Fini' %} bg-success 
+                                                {% elseif episode.status == 'En cours' %} bg-warning
+                                                {% elseif episode.status == 'En attente' %} bg-danger
+                                                {% else %} bg-primary {% endif %}">
+                                                {{ episode.status }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if episode.type == 'Livre' %}
+                                                📖 Page : {{ episode.page ?: '-' }} | Chapitre : {{ episode.chapter ?: '-' }}
+                                            {% elseif episode.type == 'Série' or episode.type == 'Animé' or episode.type == 'Dessin Animé' %}
+                                                📺 S{{ episode.season ?: '-' }} E{{ episode.episode ?: '-' }}
+                                            {% elseif episode.type == 'Saga' %}
+                                                🎬 Film n°{{ episode.filmNumber ?: '-' }}
+                                            {% elseif episode.type == 'Film' or episode.type == 'Documentaire' %}
+                                                ⏱ {{ episode.getTimerHours() ?: '0' }}h {{ episode.getTimerMinutes() ?: '00' }}min
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-dark f-w-500">{{ episode.platform ?: '-' }}</td>
+                                        <td class="text-danger f-w-500">{{ episode.reminder ? episode.reminder|date('d/m/Y') : '-' }}</td>
+                                        <td class="text-dark f-w-500">{{ episode.notes ?: '-' }}</td>
+                                        <td>
+                                            <a href="{{ path('episode_edit', { id: episode.id }) }}" class="btn btn-success icon-btn b-r-4">
+                                                <i class="ti ti-edit"></i>
+                                            </a>
+                                            <form action="{{ path('episode_delete', { id: episode.id }) }}" method="post" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ episode.id) }}">
+                                                <button type="submit" class="btn btn-danger icon-btn b-r-4 delete-btn">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="10" class="text-center text-muted">Aucun épisode enregistré.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- DataTable -->
+    <script src="{{ asset('assets/vendor/datatable/jquery.dataTables.min.js') }}"></script>
+
+    <!-- Activation DataTable -->
+    <script>
+        $(document).ready(function() {
+            $('#episodeTable').DataTable({
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ entrées",
+                    "zeroRecords": "Aucun résultat trouvé",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                    "infoEmpty": "Aucune donnée disponible",
+                    "infoFiltered": "(filtré sur _MAX_ entrées)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                }
+            });
+
+            $('#select-all').click(function() {
+                $('tbody input[type="checkbox"]').prop('checked', this.checked);
+            });
+        });
+    </script>
+{% endblock %}

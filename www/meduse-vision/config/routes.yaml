@@ -34,3 +34,32 @@ logout:
 member_area:
     path: /member_area
     controller: App\Controller\MemberAreaController::index
+
+
+
+
+episode_index:
+    path: /episode
+    controller: App\Controller\EpisodeProgressController::index
+    methods: GET
+
+episode_new:
+    path: /episode/new
+    controller: App\Controller\EpisodeProgressController::new
+    methods: [GET, POST]
+
+episode_edit:
+    path: /episode/edit/{id}
+    controller: App\Controller\EpisodeProgressController::edit
+    methods: [GET, POST]
+
+episode_delete:
+    path: /episode/delete/{id}
+    controller: App\Controller\EpisodeProgressController::delete
+    methods: POST
+
+
+
+
+
+
