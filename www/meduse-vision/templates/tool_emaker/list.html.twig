@@ -6,11 +6,11 @@
 <div class="container-fluid">
 
     <!-- Titre + Bouton d'ajout -->
-    <div class="row m-1">
-        <div class="col-6">
+    <div class="row">
+        <div class="col-6 text-primary">
             <h4 class="main-title">📌 Suivi des Contenus</h4>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-6 mb-1 mt-1 text-end">
             <a href="{{ path('episode_new') }}" class="btn btn-primary">
                 <i class="ti ti-plus"></i> Ajouter un nouveau
             </a>
@@ -34,6 +34,7 @@
                                     <th>Plateforme</th>
                                     <th>Date de Rappel</th>
                                     <th>Notes</th>
+                                    <th>Création</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -62,7 +63,7 @@
                                         <td>
                                             {% if episode.type == 'Livre' %}
                                                 📖 Page : {{ episode.page ?: '-' }} | Chapitre : {{ episode.chapter ?: '-' }}
-                                            {% elseif episode.type == 'Série' or episode.type == 'Animé' or episode.type == 'Dessin Animé' %}
+                                            {% elseif episode.type == 'Série' or episode.type == 'Animé' or episode.type == 'Dessin Animé'  or episode.type == 'Podcast' %}
                                                 📺 S{{ episode.season ?: '-' }} E{{ episode.episode ?: '-' }}
                                             {% elseif episode.type == 'Saga' %}
                                                 🎬 Film n°{{ episode.filmNumber ?: '-' }}
@@ -75,6 +76,10 @@
                                         <td class="text-dark f-w-500">{{ episode.platform ?: '-' }}</td>
                                         <td class="text-danger f-w-500">{{ episode.reminder ? episode.reminder|date('d/m/Y') : '-' }}</td>
                                         <td class="text-dark f-w-500">{{ episode.notes ?: '-' }}</td>
+                                        
+                                        <td class="text-dark f-w-500">{{ episode.createdAt ? episode.createdAt|date('d/m/Y H:i') : '-' }}</td>
+
+                                        
                                         <td>
                                             <a href="{{ path('episode_edit', { id: episode.id }) }}" class="btn btn-success icon-btn b-r-4">
                                                 <i class="ti ti-edit"></i>
@@ -111,6 +116,7 @@
     <script>
         $(document).ready(function() {
             $('#episodeTable').DataTable({
+                "order": [[0, "desc"]], // Trie par défaut sur la première colonne (ID) en décroissant
                 "language": {
                     "lengthMenu": "Afficher _MENU_ entrées",
                     "zeroRecords": "Aucun résultat trouvé",
@@ -127,9 +133,7 @@
                 }
             });
 
-            $('#select-all').click(function() {
-                $('tbody input[type="checkbox"]').prop('checked', this.checked);
-            });
         });
+
     </script>
 {% endblock %}

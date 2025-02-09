@@ -1,0 +1,151 @@
+{# {% extends 'base.html.twig' %} #}
+{% extends "/layout/master.html.twig" %}
+
+{% block title %}Épisode Maker - {{ episode.id is defined ? 'Modifier' : 'Ajouter' }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <!-- Titre principal -->
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h4 class="main-title">
+                {{ episode.id is defined ? '✏️ Modifier un contenu' : '➕ Ajouter un contenu' }}
+            </h4>
+            {% if episode.id is defined %}
+                <p class="text-muted">
+                    Vous modifiez : <strong>{{ episode.name }}</strong>
+                </p>
+            {% endif %}
+        </div>
+
+        
+
+
+
+
+
+        <div class="col-md-6 mb-1 mt-1 text-end">
+            <a href="{{ path('episode_index') }}" class="btn btn-secondary me-2">
+                <i class="ti ti-list"></i> Voir la liste
+            </a>
+            {% if episode.id is defined %}
+                <a href="{{ path('episode_new') }}" class="btn btn-primary">
+                    <i class="ti ti-plus"></i> Ajouter un nouveau
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Formulaire dans une carte -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-4 text-secondary">
+                Formulaire {{ episode.id is defined ? 'de modification' : 'd\'ajout' }}
+            </h5>
+
+            {{ form_start(form, { 'attr': {'class': 'needs-validation'} }) }}
+            
+            <!-- Section 1 : Informations générales -->
+            <h6 class="border-bottom pb-2 mb-4 text-uppercase text-secondary">🔎 Informations générales</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.name, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'placeholder': 'Nom du contenu (ex: Breaking Bad, Harry Potter)'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.type, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.type, { 'attr': {'class': 'form-select'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.status, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.status, { 'attr': {'class': 'form-select'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.platform, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.platform, { 'attr': {'class': 'form-control', 'placeholder': 'Ex: Netflix, Disney+, Amazon'} }) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 : Progression -->
+            <h6 class="border-bottom pb-2 mb-4 text-uppercase text-secondary">📈 Progression</h6>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        {{ form_label(form.page, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.page, { 'attr': {'class': 'form-control', 'placeholder': 'Page actuelle (si livre)'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        {{ form_label(form.chapter, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.chapter, { 'attr': {'class': 'form-control', 'placeholder': 'Chapitre actuel (si livre)'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        {{ form_label(form.season, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.season, { 'attr': {'class': 'form-control', 'placeholder': 'Saison actuelle (si série)'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.episode, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.episode, { 'attr': {'class': 'form-control', 'placeholder': 'Épisode actuel (si série)'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.filmNumber, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.filmNumber, { 'attr': {'class': 'form-control', 'placeholder': 'Numéro du film (si saga)'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.timerHours, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.timerHours, { 'attr': {'class': 'form-control', 'placeholder': 'Heures'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.timerMinutes, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.timerMinutes, { 'attr': {'class': 'form-control', 'placeholder': 'Minutes'} }) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 : Notes et rappels -->
+            <h6 class="border-bottom pb-2 mb-4 text-uppercase text-secondary">📋 Notes et rappels</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.reminder, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.reminder, { 'attr': {'class': 'form-control', 'type': 'date'} }) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.notes, null, { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
+                        {{ form_widget(form.notes, { 'attr': {'class': 'form-control', 'rows': '5', 'placeholder': 'Ajoutez vos commentaires ici...'} }) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            {# <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ episode.id is defined ? '💾 Enregistrer les modifications' : '➕ Ajouter le contenu' }}
+                </button>
+            </div> #}
+
+            <!-- Fin du formulaire sans bouton par défaut -->
+            {# {{ form_end(form, { 'render_rest': false }) }} #}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

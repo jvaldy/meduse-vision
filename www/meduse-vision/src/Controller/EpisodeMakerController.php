@@ -1,37 +1,44 @@
 <?php
 
+// src/Controller/EpisodeProgressController.php
+
 namespace App\Controller;
 
-use App\Entity\EpisodeProgress;
-use App\Repository\EpisodeProgressRepository;
+use App\Entity\EpisodeMaker;
+use App\Form\EpisodeMakerType;
+use App\Repository\EpisodeMakerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-
-use App\Form\EpisodeProgressType;
-
-#[Route('/episode')]
-class EpisodeProgressController extends AbstractController
+#[Route('/tool_emaker')]
+class EpisodeMakerController extends AbstractController
 {
     #[Route('/', name: 'episode_index')]
-    public function index(EpisodeProgressRepository $repository): Response
+    public function index(EpisodeMakerRepository $repository, SessionInterface $session): Response
     {
-        return $this->render('episode/index.html.twig', [
-            'episodes' => $repository->findAll(),
+        $userName = $session->get('user_name');
+        $episodes = $repository->findBy(['createdBy' => $userName]);
+
+        return $this->render('tool_emaker/list.html.twig', [
+            'episodes' => $episodes,
         ]);
     }
 
     #[Route('/new', name: 'episode_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $episode = new EpisodeProgress();
-        $form = $this->createForm(EpisodeProgressType::class, $episode);
+        $episode = new EpisodeMaker();
+        $form = $this->createForm(EpisodeMakerType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $userName = $session->get('user_name');
+            $episode->setCreatedBy($userName);
+
             $entityManager->persist($episode);
             $entityManager->flush();
             $this->addFlash('success', 'Suivi ajouté avec succès !');
@@ -39,7 +46,7 @@ class EpisodeProgressController extends AbstractController
             return $this->redirectToRoute('episode_index');
         }
 
-        return $this->render('episode/form.html.twig', [
+        return $this->render('tool_emaker/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -48,17 +55,19 @@ class EpisodeProgressController extends AbstractController
     public function edit(
         int $id,
         Request $request,
-        EpisodeProgressRepository $repository,
-        EntityManagerInterface $entityManager
+        EpisodeMakerRepository $repository,
+        EntityManagerInterface $entityManager,
+        SessionInterface $session
     ): Response {
-        $episode = $repository->find($id);
+        $userName = $session->get('user_name');
+        $episode = $repository->findOneBy(['id' => $id, 'createdBy' => $userName]);
 
         if (!$episode) {
-            $this->addFlash('error', 'Le suivi demandé n\'existe pas.');
+            $this->addFlash('error', 'Accès refusé ou épisode introuvable.');
             return $this->redirectToRoute('episode_index');
         }
 
-        $form = $this->createForm(EpisodeProgressType::class, $episode);
+        $form = $this->createForm(EpisodeMakerType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +77,7 @@ class EpisodeProgressController extends AbstractController
             return $this->redirectToRoute('episode_index');
         }
 
-        return $this->render('episode/form.html.twig', [
+        return $this->render('tool_emaker/form.html.twig', [
             'form' => $form->createView(),
             'episode' => $episode,
         ]);
@@ -78,13 +87,15 @@ class EpisodeProgressController extends AbstractController
     public function delete(
         Request $request,
         int $id,
-        EpisodeProgressRepository $repository,
-        EntityManagerInterface $entityManager
+        EpisodeMakerRepository $repository,
+        EntityManagerInterface $entityManager,
+        SessionInterface $session
     ): Response {
-        $episode = $repository->find($id);
+        $userName = $session->get('user_name');
+        $episode = $repository->findOneBy(['id' => $id, 'createdBy' => $userName]);
 
         if (!$episode) {
-            $this->addFlash('error', 'Le suivi demandé n\'existe pas.');
+            $this->addFlash('error', 'Accès refusé ou épisode introuvable.');
             return $this->redirectToRoute('episode_index');
         }
 
@@ -92,8 +103,6 @@ class EpisodeProgressController extends AbstractController
             $entityManager->remove($episode);
             $entityManager->flush();
             $this->addFlash('success', 'Suivi supprimé avec succès.');
-        } else {
-            $this->addFlash('error', 'Token CSRF invalide.');
         }
 
         return $this->redirectToRoute('episode_index');

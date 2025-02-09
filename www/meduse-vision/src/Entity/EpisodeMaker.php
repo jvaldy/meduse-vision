@@ -1,12 +1,14 @@
 <?php
 
+// src/Entity/EpisodeMaker.php
+
 namespace App\Entity;
 
-use App\Repository\EpisodeProgressRepository;
+use App\Repository\EpisodeMakerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EpisodeProgressRepository::class)]
-class EpisodeProgress
+#[ORM\Entity(repositoryClass: EpisodeMakerRepository::class)]
+class EpisodeMaker
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,48 +16,53 @@ class EpisodeProgress
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $name; // Nom du contenu
+    private string $name;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private string $type; // Film, Série, Livre, Saga, Animé, Documentaire, Dessin Animé
+    private string $type;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private string $status; // Fini, En cours, Recommencer, En attente
+    private string $status;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $page = null; // Page actuelle (si livre)
+    private ?int $page = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $chapter = null; // Chapitre actuel (si livre)
+    private ?int $chapter = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $season = null; // Saison actuelle (si série)
+    private ?int $season = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $episode = null; // Épisode actuel (si série)
+    private ?int $episode = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $filmNumber = null; // Numéro du film (si saga)
+    private ?int $filmNumber = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $timerHours = null; // Heures arrêtées (si film, série, animé)
+    private ?int $timerHours = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $timerMinutes = null; // Minutes arrêtées (si film, série, animé)
+    private ?int $timerMinutes = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $reminder = null; // Date de rappel
+    private ?\DateTimeInterface $reminder = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $platform = null; // Plateforme (Netflix, Disney+, etc.)
+    private ?string $platform = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $notes = null; // Notes et commentaires
+    private ?string $notes = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $createdBy; // Stocke le nom d'utilisateur du créateur
+
+    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeInterface $createdAt = null;
 
     // ==================== Getters & Setters ====================
 
     public function getId(): int { return $this->id; }
-    
     public function getName(): string { return $this->name; }
     public function setName(string $name): self { $this->name = $name; return $this; }
 
@@ -94,4 +101,16 @@ class EpisodeProgress
 
     public function getNotes(): ?string { return $this->notes; }
     public function setNotes(?string $notes): self { $this->notes = $notes; return $this; }
+
+    public function getCreatedBy(): string { return $this->createdBy; }
+    public function setCreatedBy(string $createdBy): self { $this->createdBy = $createdBy; return $this; }
+
+
+
+
+    public function getCreatedAt(): ?\DateTimeInterface { return $this->createdAt; }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self { $this->createdAt = $createdAt; return $this;}
+
+
 }

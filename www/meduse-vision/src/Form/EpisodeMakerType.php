@@ -6,13 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use App\Entity\EpisodeProgress;
+use App\Entity\EpisodeMaker;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class EpisodeProgressType extends AbstractType
+class EpisodeMakerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -30,6 +30,8 @@ class EpisodeProgressType extends AbstractType
                 'Animé' => 'Animé',
                 'Documentaire' => 'Documentaire',
                 'Dessin Animé' => 'Dessin Animé',
+                'Podcast' => 'Podcast',          // Nouveau type
+                'Cours' => 'Cours',              // Nouveau type
             ],
             'label' => 'Type de contenu',
             'attr' => ['class' => 'form-select'],
@@ -41,6 +43,8 @@ class EpisodeProgressType extends AbstractType
                 'À finir' => 'À finir',
                 'Recommencer' => 'Recommencer',
                 'En attente' => 'En attente',
+                'À découvrir' => 'À découvrir',  // Nouveau statut
+                'Abandonné' => 'Abandonné',      // Nouveau statut
             ],
             'label' => 'Statut',
             'attr' => ['class' => 'form-select'],
@@ -71,7 +75,7 @@ class EpisodeProgressType extends AbstractType
             'attr' => ['class' => 'form-control'],
         ])
         ->add('timerHours', IntegerType::class, [
-            'label' => 'Heures arrêtées (si film, série, animé)',
+            'label' => 'Heures arrêtées (si film, série, animé, podcast, cours)',
             'required' => false,
             'attr' => ['class' => 'form-control'],
         ])
@@ -81,7 +85,7 @@ class EpisodeProgressType extends AbstractType
             'attr' => ['class' => 'form-control'],
         ])
         ->add('platform', null, [
-            'label' => 'Plateforme (ex: Netflix, Disney+)',
+            'label' => 'Plateforme (ex: Netflix, Disney+, Spotify, Udemy)',
             'required' => false,
             'attr' => ['class' => 'form-control'],
         ])
@@ -105,7 +109,7 @@ class EpisodeProgressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EpisodeProgress::class,
+            'data_class' => EpisodeMaker::class,
         ]);
     }
 }

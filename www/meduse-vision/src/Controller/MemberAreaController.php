@@ -6,34 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-// class MemberAreaController extends AbstractController
-// {
-//     #[Route('/member/area', name: 'app_member_area')]
-//     public function index(): Response
-//     {
-//         return $this->render('member_area/index.html.twig', [
-//             'controller_name' => 'MemberAreaController',
-//         ]);
-//     }
-// }
-
-
-
-
-// class MemberAreaController extends AbstractController
-// {
-//     #[Route('/member-area', name: 'member_area')]
-//     public function index(): Response
-//     {
-//         return $this->render('index.html.twig', [
-//             'controller_name' => 'MemberAreaController',
-//         ]);
-//     }
-// }
-
-
-
-
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -49,13 +21,14 @@ class MemberAreaController extends AbstractController
             return $this->redirectToRoute('sign_in');
         }
 
+
         // Données simulées (à récupérer de la BDD si nécessaire)
         $outils = [
             [
-                'nom' => 'Outil 1',
-                'description' => 'Description rapide de l\'outil 1.',
+                'nom' => 'E-Maker',
+                'description' => "N'oubliez plus où vous vous êtes arrêtés",
                 'image' => 'https://via.placeholder.com/100',
-                'lien' => '#',
+                'lien' => $this->generateUrl('episode_index'),
             ],
             [
                 'nom' => 'Outil 22',
@@ -95,15 +68,8 @@ class MemberAreaController extends AbstractController
             ],
         ];
 
-        // return $this->render('terms_condition.html.twig', [
-        //     'outils' => $outils,
-        // ]);
 
-        
 
-        // return $this->render('member_area/index.html.twig', [
-        //     'user_name' => $session->get('user_name'),
-        // ]);
         return $this->render('index.html.twig', [
             'user_name' => $session->get('user_name'),'outils' => $outils,
         ]);

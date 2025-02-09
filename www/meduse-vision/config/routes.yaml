@@ -39,23 +39,23 @@ member_area:
 
 
 episode_index:
-    path: /episode
-    controller: App\Controller\EpisodeProgressController::index
+    path: /tool_emaker
+    controller: App\Controller\EpisodeMakerController::index
     methods: GET
 
 episode_new:
-    path: /episode/new
-    controller: App\Controller\EpisodeProgressController::new
+    path: /tool_emaker/new
+    controller: App\Controller\EpisodeMakerController::new
     methods: [GET, POST]
 
 episode_edit:
-    path: /episode/edit/{id}
-    controller: App\Controller\EpisodeProgressController::edit
+    path: /tool_emaker/edit/{id}
+    controller: App\Controller\EpisodeMakerController::edit
     methods: [GET, POST]
 
 episode_delete:
-    path: /episode/delete/{id}
-    controller: App\Controller\EpisodeProgressController::delete
+    path: /tool_emaker/delete/{id}
+    controller: App\Controller\EpisodeMakerController::delete
     methods: POST
 
 
