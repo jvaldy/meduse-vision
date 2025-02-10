@@ -63,7 +63,8 @@ class SignUpController extends AbstractController
         // Si l'utilisateur est déjà connecté, redirige vers "member_area"
         if ($session->has('user_id')) {
             // return $this->redirectToRoute('member_area');
-            return $this->redirectToRoute('/');
+            // return $this->redirectToRoute('/');
+            return $this->redirectToRoute('index');
         }
 
 

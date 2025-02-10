@@ -24,7 +24,8 @@ class SignInController extends AbstractController
 
         // Si l'utilisateur est déjà connecté, redirige vers "member_area"
         if ($session->has('user_id')) {
-            return $this->redirectToRoute('member_area');
+            // return $this->redirectToRoute('/');
+            return $this->redirectToRoute('index');
         }
 
 
@@ -75,7 +76,8 @@ class SignInController extends AbstractController
             $session->set('user_name', $user->getUsername());
 
             $this->addFlash('success', 'Connexion réussie !');
-            return $this->redirectToRoute('member_area');
+            // return $this->redirectToRoute('/');
+            return $this->redirectToRoute('index');
         }
 
         // Envoi du formulaire à la vue
