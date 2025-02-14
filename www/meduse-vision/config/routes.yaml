@@ -31,9 +31,6 @@ terms_condition:
 logout:
     path: /logout
 
-member_area:
-    path: /member_area
-    controller: App\Controller\MemberAreaController::index
 
 
 
@@ -58,6 +55,78 @@ episode_delete:
     controller: App\Controller\EpisodeMakerController::delete
     methods: POST
 # ******************
+
+
+
+
+
+# noti_file_index:
+#     path: /noti-file
+#     controller: App\Controller\NotiFileController::index
+#     methods: GET
+
+# noti_file_new:
+#     path: /noti-file/new
+#     controller: App\Controller\NotiFileController::new
+#     methods: [GET, POST]
+
+# noti_file_edit:
+#     path: /noti-file/edit/{id}
+#     controller: App\Controller\NotiFileController::edit
+#     methods: [GET, POST]
+
+# noti_file_delete:
+#     path: /noti-file/delete/{id}
+#     controller: App\Controller\NotiFileController::delete
+#     methods: POST
+
+# noti_file_archive:
+#     path: /noti-file/archive/{id}
+#     controller: App\Controller\NotiFileController::archive
+#     methods: POST
+
+# noti_file_download:
+#     path: /noti-file/download/{id}
+#     controller: App\Controller\NotiFileController::download
+#     methods: GET
+
+
+# controllers:
+#     resource: ../src/Controller/
+#     type: attribute
+
+# notifile:
+#     path: /notifile
+#     controller: App\Controller\NotiFileController
+
+notifile:
+    resource: ../src/Controller/NotiFileController.php
+    type: annotation
+
+notifile_edit:
+    path: /notifile/edit/{id}
+    controller: App\Controller\NotiFileController::edit
+
+notifile_download:
+    path: /notifile/download/{id}
+    controller: App\Controller\NotiFileController::download
+
+notifile_index:
+    path: /notifile
+    controller: App\Controller\NotiFileController::index
+
+notifile_new:
+    path: /notifile/new
+    controller: App\Controller\NotiFileController::new
+
+notifile_show:
+    path: /notifile/show/{id}
+    controller: App\Controller\NotiFileController::show
+
+notifile_delete:
+    path: /notifile/delete/{id}
+    controller: App\Controller\NotiFileController::delete
+    methods: POST
 
 
 

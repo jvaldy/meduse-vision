@@ -1,0 +1,140 @@
+{% extends "/layout/master.html.twig" %}
+
+{% block title %}📂 NotiFile - Ajouter/Modifier{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <!-- Titre et Boutons -->
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="main-title">{{ file.id is defined ? '✏️ Modifier un Document' : '➕ Ajouter un Document' }}</h4>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ path('notifile_index') }}" class="btn btn-secondary">
+                <i class="ti ti-list"></i> Voir la liste
+            </a>
+            {% if file.id is defined %}
+                <a href="{{ path('notifile_new') }}" class="btn btn-primary">
+                    <i class="ti ti-plus"></i> Ajouter un nouveau
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="card mt-3">
+        <div class="card-body">
+            {{ form_start(form, { 'attr': {'class': 'needs-validation'} }) }}
+
+            <div class="row">
+                <!-- Partie 1: Infos principales -->
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-primary text-white">
+                            📄 Informations Générales
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{ form_label(form.name) }}
+                                {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_label(form.expirationDate) }}
+                                {{ form_widget(form.expirationDate, { 'attr': {'class': 'form-control', 'type': 'date'} }) }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_label(form.priority) }}
+                                {{ form_widget(form.priority, { 'attr': {'class': 'form-select'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partie 2: Détails -->
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-info text-white">
+                            📧 Contact & Fichier
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_label(form.file) }}
+                                {{ form_widget(form.file, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partie 3: Rappels et Statut -->
+            <div class="card mb-3">
+                <div class="card-header bg-warning text-dark">
+                    ⏰ Rappels & Statut
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                {{ form_label(form.reminderBeforeDays) }}
+                                {{ form_widget(form.reminderBeforeDays, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                {{ form_label(form.reminderAfterDays) }}
+                                {{ form_widget(form.reminderAfterDays, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                {{ form_label(form.status) }}
+                                {{ form_widget(form.status, { 'attr': {'class': 'form-select'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partie 4: Notes -->
+            <div class="card mb-3">
+                <div class="card-header bg-secondary text-white">
+                    📝 Notes
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        {{ form_label(form.notes) }}
+                        {{ form_widget(form.notes, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partie 5: Description -->
+            <div class="card mb-3">
+                <div class="card-header bg-dark text-white">
+                    ✍️ Description
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'rows': '4'} }) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton de validation -->
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+                {{ file.id is defined ? '💾 Modifier' : '➕ Ajouter' }}
+            </button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

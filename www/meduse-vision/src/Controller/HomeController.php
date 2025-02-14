@@ -26,16 +26,16 @@ class HomeController extends AbstractController
         // Données simulées (à récupérer de la BDD si nécessaire)
         $outils = [
             [
-                'nom' => 'E-Maker',
+                'nom' => 'EMaker',
                 'description' => "N'oubliez plus où vous vous êtes arrêtés",
                 'image' => 'https://via.placeholder.com/100',
                 'lien' => $this->generateUrl('episode_index'),
             ],
             [
-                'nom' => 'Outil 22',
-                'description' => 'Description rapide de l\'outil 2.',
+                'nom' => 'NotiFile',
+                'description' => "N'oubliez plus de renouveler vos documents",
                 'image' => 'https://via.placeholder.com/100',
-                'lien' => '#',
+                'lien' => $this->generateUrl('notifile_index'),
             ],
             [
                 'nom' => 'Outil 3',

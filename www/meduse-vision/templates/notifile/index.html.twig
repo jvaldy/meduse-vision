@@ -1,0 +1,131 @@
+{% extends "/layout/master.html.twig" %}
+{% block title %}📂 Gestion des Documents{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <!-- Titre + Bouton d'ajout -->
+    <div class="row">
+        <div class="col-6 text-primary">
+            <h4 class="main-title">📂 Suivi des Documents</h4>
+        </div>
+        <div class="col-6 mb-1 mt-1 text-end">
+            <a href="{{ path('notifile_new') }}" class="btn btn-primary">
+                <i class="ti ti-plus"></i> Ajouter un document
+            </a>
+        </div>
+    </div>
+
+    <!-- Tableau dynamique -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body ps-3 pe-3">
+                    <div class="table-responsive app-scroll app-datatable-default project-table">
+                        <table id="notiFileTable" class="display container-fluid table-bottom-border app-data-table table-box-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Expiration</th>
+                                    <th>Priorité</th>
+                                    {# <th>Statut</th> #}
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                    <tr>
+                                        <td class="text-dark f-w-500">{{ file.id }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-left align-items-center">
+                                                <div>
+                                                    <h6 class="f-s-15 mb-0">{{ file.name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-danger f-w-500">
+                                            {{ file.expirationDate ? file.expirationDate|date('d/m/Y') : '-' }}
+                                        </td>
+                                        <td>
+                                            <span class="badge 
+                                                {% if file.priority == 1 %} bg-danger 
+                                                {% elseif file.priority == 2 %} bg-warning
+                                                {% elseif file.priority == 3 %} bg-info
+                                                {% elseif file.priority == 4 %} bg-primary
+                                                {% else %} bg-secondary {% endif %}">
+                                                {{ file.priority }}
+                                            </span>
+                                        {# </td>
+                                        <td class="text-dark f-w-500">{{ file.reminderBeforeDays ?: '-' }} jours</td>
+                                        <td class="text-dark f-w-500">{{ file.reminderAfterDays ?: '-' }} jours</td>
+                                        <td class="text-dark f-w-500">{{ file.email ?: '-' }}</td> #}
+                                        {# <td>
+                                            <span class="badge 
+                                                {% if file.isRenewed %} bg-success 
+                                                {% else %} bg-danger {% endif %}">
+                                                {{ file.isRenewed ? 'Renouvelé' : 'Non renouvelé' }}
+                                            </span>
+                                        </td> #}
+
+                                        <td>
+                                            <a href="{{ path('notifile_show', { id: file.id }) }}" class="btn btn-info icon-btn b-r-4">
+                                                <i class="ti ti-eye"></i>
+                                            </a>
+                                            <a href="{{ path('notifile_edit', { id: file.id }) }}" class="btn btn-warning icon-btn b-r-4">
+                                                <i class="ti ti-edit"></i>
+                                            </a>
+                                            <a href="{{ path('notifile_download', { id: file.id }) }}" class="btn btn-success icon-btn b-r-4">
+                                                <i class="ti ti-download"></i>
+                                            </a>
+                                            <form action="{{ path('notifile_delete', { id: file.id }) }}" method="post" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ file.id) }}">
+                                                <button type="submit" class="btn btn-danger icon-btn b-r-4 delete-btn" onclick="return confirm('Confirmer la suppression ?')">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="9" class="text-center text-muted">Aucun document enregistré.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- DataTable -->
+    <script src="{{ asset('assets/vendor/datatable/jquery.dataTables.min.js') }}"></script>
+
+    <!-- Activation DataTable -->
+    <script>
+        $(document).ready(function() {
+            $('#notiFileTable').DataTable({
+                "order": [[0, "desc"]], // Trie par défaut sur la première colonne (ID) en décroissant
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ entrées",
+                    "zeroRecords": "Aucun résultat trouvé",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                    "infoEmpty": "Aucune donnée disponible",
+                    "infoFiltered": "(filtré sur _MAX_ entrées)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
