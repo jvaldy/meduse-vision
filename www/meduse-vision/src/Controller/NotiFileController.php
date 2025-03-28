@@ -59,31 +59,24 @@ class NotiFileController extends AbstractController
         ]);
     }
 
-    // #[Route('/show/{id}', name: 'notifile_show')]
-    // public function show(NotiFile $file): Response
-    // {
-    //     return $this->render('notifile/show.html.twig', [
-    //         'file' => $file
-    //     ]);
-    // }
 
     #[Route('/notifile/download/{id}', name: 'notifile_download')]
-public function download(int $id, NotiFileRepository $repository): Response
-{
-    $file = $repository->find($id);
+    public function download(int $id, NotiFileRepository $repository): Response
+    {
+        $file = $repository->find($id);
 
-    if (!$file || !$file->getFileName()) {
-        throw $this->createNotFoundException('Le fichier demandé est introuvable.');
+        if (!$file || !$file->getFileName()) {
+            throw $this->createNotFoundException('Le fichier demandé est introuvable.');
+        }
+
+        $filePath = $this->getParameter('uploads_directory') . '/' . $file->getFileName();
+
+        if (!file_exists($filePath)) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas sur le serveur.');
+        }
+
+        return $this->file($filePath);
     }
-
-    $filePath = $this->getParameter('uploads_directory') . '/' . $file->getFileName();
-
-    if (!file_exists($filePath)) {
-        throw $this->createNotFoundException('Le fichier n\'existe pas sur le serveur.');
-    }
-
-    return $this->file($filePath);
-}
 
 
 

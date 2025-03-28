@@ -27,9 +27,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom</th>
-                                    <th>Expiration</th>
                                     <th>Priorité</th>
-                                    {# <th>Statut</th> #}
+                                    <th>Expiration</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -44,9 +43,6 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-danger f-w-500">
-                                            {{ file.expirationDate ? file.expirationDate|date('d/m/Y') : '-' }}
-                                        </td>
                                         <td>
                                             <span class="badge 
                                                 {% if file.priority == 1 %} bg-danger 
@@ -56,18 +52,12 @@
                                                 {% else %} bg-secondary {% endif %}">
                                                 {{ file.priority }}
                                             </span>
-                                        {# </td>
-                                        <td class="text-dark f-w-500">{{ file.reminderBeforeDays ?: '-' }} jours</td>
-                                        <td class="text-dark f-w-500">{{ file.reminderAfterDays ?: '-' }} jours</td>
-                                        <td class="text-dark f-w-500">{{ file.email ?: '-' }}</td> #}
-                                        {# <td>
-                                            <span class="badge 
-                                                {% if file.isRenewed %} bg-success 
-                                                {% else %} bg-danger {% endif %}">
-                                                {{ file.isRenewed ? 'Renouvelé' : 'Non renouvelé' }}
-                                            </span>
-                                        </td> #}
-
+                                        </td>
+                                        <td class="text-danger f-w-500">
+                                            {{ file.expirationDate ? file.expirationDate|date('d/m/Y') : '-' }}
+                                        </td>
+                                        
+                                        
                                         <td>
                                             <a href="{{ path('notifile_show', { id: file.id }) }}" class="btn btn-info icon-btn b-r-4">
                                                 <i class="ti ti-eye"></i>
@@ -85,6 +75,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        
                                     </tr>
                                 {% else %}
                                     <tr>

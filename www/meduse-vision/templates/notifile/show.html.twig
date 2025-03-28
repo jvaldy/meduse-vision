@@ -10,12 +10,13 @@
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item"><strong>📌 Nom :</strong> {{ file.name }}</li>
+                <li class="list-group-item"><strong>🔥 Priorité :</strong> <span class="badge bg-danger">{{ file.priority }}</span></li>
+                <li class="list-group-item"><strong>📧 Email :</strong> {{ file.email }}</li>
                 <li class="list-group-item"><strong>📅 Expiration :</strong> {{ file.expirationDate ? file.expirationDate|date('d/m/Y') : 'Non renseignée' }}</li>
                 <li class="list-group-item"><strong>🔔 Rappel avant expiration :</strong> {{ file.reminderBeforeDays ? file.reminderBeforeDays ~ ' jours' : '-' }}</li>
                 <li class="list-group-item"><strong>🔔 Rappel après expiration :</strong> {{ file.reminderAfterDays ? file.reminderAfterDays ~ ' jours' : '-' }}</li>
-                <li class="list-group-item"><strong>📧 Email :</strong> {{ file.email }}</li>
                 <li class="list-group-item"><strong>📑 Description :</strong> {{ file.description ?: 'Non renseignée' }}</li>
-                <li class="list-group-item"><strong>🔥 Priorité :</strong> <span class="badge bg-danger">{{ file.priority }}</span></li>
+                <li class="list-group-item"><strong>📑 Note :</strong> {{ file.notes ?: 'Non renseignée' }}</li>
                 <li class="list-group-item"><strong>📂 Document :</strong> 
                     {% if file.fileName %}
                         <a href="{{ path('notifile_download', { id: file.id }) }}" class="btn btn-success btn-sm">⬇ Télécharger</a>

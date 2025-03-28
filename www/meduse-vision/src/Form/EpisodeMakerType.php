@@ -70,7 +70,7 @@ class EpisodeMakerType extends AbstractType
             'attr' => ['class' => 'form-control'],
         ])
         ->add('filmNumber', IntegerType::class, [
-            'label' => 'Numéro du film (si saga)',
+            'label' => 'N° de l\'Opus',
             'required' => false,
             'attr' => ['class' => 'form-control'],
         ])

@@ -55,6 +55,12 @@ class NotiFile
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $notes = null;
 
+
+    #[ORM\Column(type: 'string', length: 255)]
+    // private string $createdBy; // Stocke le nom d'utilisateur du créateur
+
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -88,4 +94,10 @@ class NotiFile
     public function getCreatedAt(): \DateTimeInterface { return $this->createdAt; }
     public function getNotes(): ?string { return $this->notes; }
     public function setNotes(?string $notes): self { $this->notes = $notes; return $this; }
+
+
+    // public function getCreatedBy(): string { return $this->createdBy; }
+    // public function setCreatedBy(string $createdBy): self { $this->createdBy = $createdBy; return $this; }
+
+
 }

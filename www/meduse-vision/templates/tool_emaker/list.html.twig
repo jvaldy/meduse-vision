@@ -28,13 +28,13 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom</th>
-                                    <th>Type</th>
-                                    <th>Statut</th>
                                     <th>Progression</th>
+                                    <th>Type</th>
+                                    <th>Statut</th>                                    
                                     <th>Plateforme</th>
                                     <th>Date de Rappel</th>
                                     <th>Notes</th>
-                                    <th>Création</th>
+                                    {# <th>Création</th> #}
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -50,6 +50,19 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            {% if episode.type == 'Livre' %}
+                                                P{{ episode.page ?: '-' }} Ch{{ episode.chapter ?: '-' }}
+                                            {% elseif episode.type == 'Série' or episode.type == 'Animé' or episode.type == 'Dessin Animé'  or episode.type == 'Podcast' or episode.type == 'Documentaire' %}
+                                                S{{ episode.season ?: '-' }} E{{ episode.episode ?: '-' }} <br>{{ episode.getTimerHours() ?: '0' }}h {{ episode.getTimerMinutes() ?: '00' }}min
+                                            {% elseif episode.type == 'Saga' or episode.type == 'Cours' %}
+                                                Opus n°{{ episode.filmNumber ?: '-' }} <br>{{ episode.getTimerHours() ?: '0' }}h {{ episode.getTimerMinutes() ?: '00' }}min
+                                            {% elseif episode.type == 'Film'%} 
+                                                {{ episode.getTimerHours() ?: '0' }}h {{ episode.getTimerMinutes() ?: '00' }}min
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
                                         <td class="text-dark f-w-500">{{ episode.type }}</td>
                                         <td>
                                             <span class="badge 
@@ -60,24 +73,16 @@
                                                 {{ episode.status }}
                                             </span>
                                         </td>
-                                        <td>
-                                            {% if episode.type == 'Livre' %}
-                                                📖 Page : {{ episode.page ?: '-' }} | Chapitre : {{ episode.chapter ?: '-' }}
-                                            {% elseif episode.type == 'Série' or episode.type == 'Animé' or episode.type == 'Dessin Animé'  or episode.type == 'Podcast' %}
-                                                📺 S{{ episode.season ?: '-' }} E{{ episode.episode ?: '-' }}
-                                            {% elseif episode.type == 'Saga' %}
-                                                🎬 Film n°{{ episode.filmNumber ?: '-' }}
-                                            {% elseif episode.type == 'Film' or episode.type == 'Documentaire' %}
-                                                ⏱ {{ episode.getTimerHours() ?: '0' }}h {{ episode.getTimerMinutes() ?: '00' }}min
-                                            {% else %}
-                                                -
-                                            {% endif %}
-                                        </td>
+                                        
                                         <td class="text-dark f-w-500">{{ episode.platform ?: '-' }}</td>
                                         <td class="text-danger f-w-500">{{ episode.reminder ? episode.reminder|date('d/m/Y') : '-' }}</td>
                                         <td class="text-dark f-w-500">{{ episode.notes ?: '-' }}</td>
                                         
-                                        <td class="text-dark f-w-500">{{ episode.createdAt ? episode.createdAt|date('d/m/Y H:i') : '-' }}</td>
+                                        {# <td class="text-dark f-w-500"> ### </td> #}
+                                        {# <td class="text-dark f-w-500">{{ episode.createdAt }}</td> #}
+
+                                        {# <td class="text-dark f-w-500">{{ episode.createdAt ? episode.createdAt|date('d/m/Y H:i') : '-' }}</td> #}
+                                        {# <td class="text-dark f-w-500">{{ episode.createdAt is not empty ? episode.createdAt : '-' }}</td> #}
 
                                         
                                         <td>

@@ -1,6 +1,7 @@
 <?php
 
 // src/Entity/EpisodeMaker.php
+// src/Entity/EpisodeMaker.php
 
 namespace App\Entity;
 
@@ -57,8 +58,8 @@ class EpisodeMaker
     #[ORM\Column(type: 'string', length: 255)]
     private string $createdBy; // Stocke le nom d'utilisateur du créateur
 
-    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(type: 'string', length: 19)]
+    private string $createdAt; // Date au format string (YYYY-MM-DD HH:MM:SS)
 
     // ==================== Getters & Setters ====================
 
@@ -105,12 +106,11 @@ class EpisodeMaker
     public function getCreatedBy(): string { return $this->createdBy; }
     public function setCreatedBy(string $createdBy): self { $this->createdBy = $createdBy; return $this; }
 
+    public function getCreatedAt(): string { return $this->createdAt; }
 
-
-
-    public function getCreatedAt(): ?\DateTimeInterface { return $this->createdAt; }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self { $this->createdAt = $createdAt; return $this;}
-
-
+    public function setCreatedAt(?string $createdAt = null): self 
+    {
+        $this->createdAt = $createdAt ?? date('Y-m-d H:i:s'); // Stockage sous format string
+        return $this;
+    }
 }
