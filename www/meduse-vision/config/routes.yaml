@@ -36,22 +36,22 @@ logout:
 
 # Liens outil EMaker
 episode_index:
-    path: /tool_emaker
+    path: /emaker
     controller: App\Controller\EpisodeMakerController::index
     methods: GET
 
 episode_new:
-    path: /tool_emaker/new
+    path: /emaker/new
     controller: App\Controller\EpisodeMakerController::new
     methods: [GET, POST]
 
 episode_edit:
-    path: /tool_emaker/edit/{id}
+    path: /emaker/edit/{id}
     controller: App\Controller\EpisodeMakerController::edit
     methods: [GET, POST]
 
 episode_delete:
-    path: /tool_emaker/delete/{id}
+    path: /emaker/delete/{id}
     controller: App\Controller\EpisodeMakerController::delete
     methods: POST
 # ******************

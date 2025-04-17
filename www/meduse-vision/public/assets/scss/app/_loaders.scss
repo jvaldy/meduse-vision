@@ -38,7 +38,7 @@
 	animation: l1 1s linear infinite alternate;
 }
 .loader_1:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--primary));
 }
 @keyframes l1 {to{opacity: 0}}
@@ -54,7 +54,7 @@
 	animation: l2 2s linear infinite;
 }
 .loader_2:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--secondary));
 }
 @keyframes l2 {to{background-size: 100% 3px}}
@@ -69,7 +69,7 @@
 	animation: l3 2s steps(6) infinite;
 }
 .loader_3:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--success));
 
 	
@@ -87,7 +87,7 @@
 	animation: l4 1s steps(4) infinite;
 }
 .loader_4:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--danger));
 }
 @keyframes l4 {to{clip-path: inset(0 -1ch 0 0)}}
@@ -101,7 +101,7 @@
 	animation: l5 2s steps(11) infinite;
 }
 .loader_5:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color:  rgb(var(--warning));
 }
 @keyframes l5 {to{clip-path: inset(0 -1ch 0 0)}}
@@ -118,7 +118,7 @@
 	animation: l6 2s infinite linear;
 }
 .loader_6:before {
-	content:"Loading..."
+	content:"Chargement..."
 }
 @keyframes l6 {to{text-shadow:-11ch 0 var(--c),0ch 0 var(--c)}}
 
@@ -134,7 +134,7 @@
 	animation: l7 2s infinite steps(11);
 }
 .loader_7:before {
-	content:"Loading..."
+	content:"Chargement..."
 }
 @keyframes l7 {to{background-position: left}}
 
@@ -151,7 +151,7 @@
 	animation: l8 2s infinite steps(11);
 }
 .loader_8:before {
-	content:"Loading..."
+	content:"Chargement..."
 }
 @keyframes l8 {to{background-position: left}}
 
@@ -166,7 +166,7 @@
 	animation: l9 5s infinite cubic-bezier(0.3,1,0,1);
 }
 .loader_9:before {
-	content:"Loading..."
+	content:"Chargement..."
 }
 @keyframes l9 {
 	0%  {text-shadow: 0    0 rgb(var(--primary)), 11ch 0  rgb(var(--success)), 22ch 0 rgb(var(--danger)), 33ch 0 rgb(var(--info)),44ch 0 rgb(var(--primary))}
@@ -187,7 +187,7 @@
 	animation:l10 5s infinite cubic-bezier(0.3,1,0,1);
 }
 .loader_10:before {
-	content:"Loading..."
+	content:"Chargement..."
 }
 @keyframes l10 {
 	25% {background-position: calc(1*100%/3) 0}
@@ -205,7 +205,7 @@
 }
 .loader_11:before,
 .loader_11:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	-webkit-mask:linear-gradient(90deg,#000 50%,#0000 0) 0 50%/2ch 100%;
 	animation: l11 1s infinite cubic-bezier(0.5,220,0.5,-220);
@@ -226,7 +226,7 @@
 }
 .loader_12:before,
 .loader_12:after {
-	content: "Loading...";
+	content: "Chargement...";
 	color: rgb(var(--primary));
 	grid-area: 1/1;
 	clip-path: inset(0 -200% 50%);
@@ -250,7 +250,7 @@
 }
 .loader_13:before,
 .loader_13:after {
-	content: "Loading...";
+	content: "Chargement...";
 	grid-area: 1/1;
 	clip-path: inset(0 -200% 50%);
 	text-shadow: -10ch 0 0;
@@ -278,7 +278,7 @@
 	animation: l14 1.5s infinite;
 }
 .loader_14:before {
-	content: "Loading...";
+	content: "Chargement...";
 }
 @keyframes l14 {
 	80%  {text-shadow:    0  0 0 rgb(var(--primary)),10ch 0 0 rgb(var(--primary));background-size:100% 3px}
@@ -295,7 +295,7 @@
 }
 .loader_15:before,
 .loader_15:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	-webkit-mask: linear-gradient(90deg,#000 50%,#0000 0) 0 50%/2ch 100%;
 	color: #0000;
@@ -330,7 +330,7 @@
 	animation: l16 2s infinite;
 }
 .loader_16:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 @keyframes l16 {
 	20% {text-shadow:
@@ -390,7 +390,7 @@
 	animation: l17 2s infinite;
 }
 .loader_17:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l17 {
@@ -473,7 +473,7 @@
 	animation: l18 3s infinite;
 }
 .loader_18:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l18 {
@@ -558,7 +558,7 @@
 	animation: l19 2s infinite linear;
 }
 .loader_19:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l19 {
@@ -645,7 +645,7 @@
 	animation: l20 2s infinite linear;
 }
 .loader_20:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l20 {
@@ -690,7 +690,7 @@
 	animation: l21 2s infinite linear;
 }
 .loader_21::before {
-	content :"Loading...";
+	content :"Chargement...";
 	color: rgba(var(--warning),.1);
 	padding: 0 5px;
 	background: inherit;
@@ -714,7 +714,7 @@
 	animation: l22 2s infinite;
 }
 .loader_22::before {
-	content: "Loading...";
+	content: "Chargement...";
 	color: #0000;
 	padding: 0 5px;
 	background: inherit;
@@ -735,7 +735,7 @@
 	overflow: hidden;
 }
 .loader_23::before {
-	content: "Loading...";
+	content: "Chargement...";
 	color: #0000;
 	text-shadow: 0 0 0 rgba(var(--danger)),10ch 0 0 #fff,20ch 0 0 rgba(var(--danger));
 	background: linear-gradient(90deg,rgba(var(--danger), .1) calc(100%/3),rgba(var(--danger)) 0 calc(2*100%/3),rgba(var(--danger), .1) 0) left/300% 100%;
@@ -757,7 +757,7 @@
 	animation: l24 1s infinite alternate linear;
 }
 .loader_24::before {
-	content: "Loading...";
+	content: "Chargement...";
 	line-height: 1em;
 	color: #0000;
 	background: inherit;
@@ -778,7 +778,7 @@
 	animation: l25 1s infinite;
 }
 .loader_25::before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--danger));
 }
 
@@ -801,7 +801,7 @@
 	animation: l26 2s infinite;
 }
 .loader_26::before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--success));
 }
 
@@ -845,7 +845,7 @@
 	animation: l28 2s infinite;
 }
 .loader_28::before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--secondary));
 }
 
@@ -866,7 +866,7 @@
 }
 .loader_29:before,
 .loader_29:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	color: rgb(var(--warning));
 	-webkit-mask:linear-gradient(90deg,#000 50%,#0000 0) 0 50%/2ch 100%;
@@ -889,7 +889,7 @@
 }
 .loader_30:before,
 .loader_30:after {
-	content: "Loading...";
+	content: "Chargement...";
 	grid-area: 1/1;
 	color: rgb(var(--success));
 	line-height: 1em;
@@ -914,7 +914,7 @@
 }
 .loader_31:before,
 .loader_31:after {
-	content: "Loading...";
+	content: "Chargement...";
 	grid-area: 1/1;
 	line-height: 1em;
 	color: rgb(var(--info));
@@ -949,7 +949,7 @@
 	animation: l31 1s infinite cubic-bezier(0.5,-150,0.5,150);
 }
 .loader_31:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l31{
@@ -973,7 +973,7 @@
 	animation: l32 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
 }
 .loader_32:before {
-	content:"Loading...";
+	content:"Chargement...";
 	color: rgb(var(--primary));
 }
 
@@ -1000,7 +1000,7 @@
 	animation: l33 1s infinite alternate;
 }
 .loader_33:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l33{
@@ -1075,16 +1075,16 @@
 	font-size: 30px;
 }
 .loader_34:before {
-	content: "Loading...";
+	content: "Chargement...";
 	animation: l34 1s infinite alternate;
 }
 
 @keyframes l34{
 	0%,15%,75%,100% {
-		content:"Loading...";
+		content:"Chargement...";
 		color: rgb(var(--danger));
 	}
-	20% {content:"Loading..."}
+	20% {content:"Chargement..."}
 	25% {content:"Lo ding..."}
 	30% {content:"Load ng..."}
 	35% {content:" oading..."}
@@ -1105,7 +1105,7 @@
 }
 .loader_35:before,
 .loader_35:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	-webkit-mask-size: 100% 5px,100% 100%;
 	-webkit-mask-repeat: no-repeat;
@@ -1148,7 +1148,7 @@
 }
 .loader_36:before,
 .loader_36:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	-webkit-mask-size: 1.5ch 100%,100% 100%;
 	-webkit-mask-repeat: no-repeat;
@@ -1190,7 +1190,7 @@
 }
 .loader_37:before,
 .loader_37:after {
-	content:"Loading...";
+	content:"Chargement...";
 	grid-area: 1/1;
 	-webkit-mask-size: 2ch 100%,100% 100%;
 	-webkit-mask-repeat: no-repeat;
@@ -1233,7 +1233,7 @@
 	overflow: hidden;
 }
 .loader_38:before {
-	content:"Loading...\AgodnLai...\Aoiaglni...\ALiongad...\Agindola...\Analoidg...";
+	content:"Chargement...\AgodnLai...\Aoiaglni...\ALiongad...\Agindola...\Analoidg...";
 	white-space: pre;
 	display:inline-block;
 	animation: l38 1s infinite steps(6);
@@ -1255,7 +1255,7 @@
 	overflow: hidden;
 }
 .loader_39:before {
-	content:"Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔";
+	content:"Chargement...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔";
 	white-space: pre;
 	display: inline-block;
 	animation: l39 1s infinite steps(11) alternate;
@@ -1280,7 +1280,7 @@
 	animation: l40 2s infinite;
 }
 .loader_40:before {
-	content:"Loading...";
+	content:"Chargement...";
 }
 
 @keyframes l40{
